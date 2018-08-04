@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<style type="text/css">
+        *{padding: 0;margin: 0;}
+        body{background-image:url(images/index.jpg);background-size: 100% 100%; width: 400px;height: 408px;background-repeat: no-repeat;}
+      
+        #bd{position: relative;margin-top: 200px;margin-left: 1020px;}
+        .choose{display: block;margin-top: 50px;cursor: pointer;}
+        .choose img{border: 0px;}                                                    /*定义了页面的样式*/
+        #a img{width: 220px;height: 60px;border: 0px;}
+        #b img{width: 220px;height: 60px;border: 0px;}
+        #c img{width: 220px;height: 60px;border: 0px;}
+        #a {display: none;}
+        #b {display: none;}
+        #c {display: none;}        
+	</style>
+	<script type="text/javascript">
+        window.onload=function()
+        {
+        	
+        	var aa=document.getElementById('aa');
+        	var a=document.getElementById("a");
+                var bb=document.getElementById('bb');
+                var b=document.getElementById("b");                                          //定义了6张图片，3张显示，3张隐藏。
+                var cc=document.getElementById('cc');
+                var c=document.getElementById("c");
+                aa.onmouseover=function()
+                {
+                       
+                        aa.style.display='none';//当鼠标移到该图片上的时候，小的图片隐藏，大的显示。这就实现了鼠标移在上面时图片放大的动画
+                        a.style.display='block';
+                        bb.style.marginTop='34px';
+                }
+                a.onmouseout=function()
+                {
+                        aa.style.display='block';
+                        a.style.display='none';//作用如上，当然如果图片多得话这样写比较麻烦，最好就是封装成一个函数。
+                        bb.style.marginTop='50px';
+                }
+
+                
+                bb.onmouseover=function()
+                {
+                       
+                        bb.style.display='none';
+                        b.style.display='block';
+                        cc.style.marginTop='36px';
+                }
+                b.onmouseout=function()
+                {
+                        bb.style.display='block';
+                        b.style.display='none';
+                        cc.style.marginTop='50px';
+                }
+                
+                cc.onmouseover=function()
+                {
+                       
+                        cc.style.display='none';
+                        c.style.display='block';
+                }
+                c.onmouseout=function()
+                {
+                        cc.style.display='block';
+                        c.style.display='none';
+                }
+        }
+	</script>
+</head>
+<body>
+		
+	<div id="bd">
+                <a href="新用户注册.html" class="choose" id="a"><img src="images/choose1.png" ></a>
+		<a href="新用户注册.html" class="choose" id="aa"><img src="images/choose1.png" ></a>
+                <a href="预约界面.html" class="choose" id="b"><img src="images/choose2.png" ></a>
+		<a href="预约界面.html" class="choose" id="bb"><img src="images/choose2.png" ></a>
+                <a href="预约界面.html" class="choose" id="c"><img src="images/choose3.png" ></a>
+		<a href="预约界面.html" class="choose" id="cc"><img src="images/choose3.png" ></a>
+	</div>
+		
+</body>
+</html>

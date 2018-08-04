@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<style type="text/css">
+         *{margin:0;padding: 0; }
+         div{border: 1px solid #CDCDCD;}
+         #head img{width: 100%;height: 80px;}
+         #head{padding-left: 30px;padding-right: 30px;padding-top:20px; }
+         #left{width: 980px;height: 350px;float: left;margin-left: 30px;margin-top: 12px;}
+         #right{float: right;display: block;width: 300px;margin-top: 12px;margin-right: 30px;padding-bottom: 20px;}
+         .tit{height: 30px;border-bottom: 1px solid #CDCDCD;;padding-left: 5px;line-height: 30px;background-color: #E9E9E9;color:#CD7F32;}
+         ul li{float: left;list-style: none;width: 300px;height: 150px;}
+         ul{text-align: center;}
+         .big{width: 90px;height: 90px;display:none;padding-left: 115px;}
+         .small{width: 80px;height: 80px;display: block;padding-left: 115px;}
+         .same{margin-left: 30px;}
+         #exit{position: absolute;top: 180px;left: 500px;background-color: white;width: 180px;height: 60px;text-align: center;padding-top: 30px; display: none;}
+         #zhe{opacity: 0.3;background-color: #000;position: absolute;top: 0;left: 0;display: none;}
+	</style>
+</head>
+<body>
+    <div id="head"><img src="images/head1.jpg"></div>
+    <div id="left">
+    	<p class="tit">选择科室</p>
+    	<ul >
+    		<li>泌尿内科<br/><img src="images/miniao.png" class="small" /><img src="images/miniao.png" class="big"><a href="挂号界面.html">挂号</a></li>
+    		<li>产科<br/><img src="images/changke.png"  class="small"/><img src="images/changke.png" class="big"><a href="挂号界面.html">挂号</a></li>
+    		<li>耳鼻咽喉科<br/><img src="images/erhoubi.png" class="small"/><img src="images/erhoubi.png" class="big"><a href="挂号界面.html">挂号</a></li>
+    		<li>妇科<br/><img src="images/fuke.png" class="small"/><img src="images/fuke.png" class="big"><a href="挂号界面.html">挂号</a></li>
+    	</ul>
+    	<ul>
+    		<li>骨科<br/><img src="images/guke.png" class="small"/><img src="images/guke.png" class="big"><a href="挂号界面.html">挂号</a></li>
+    		<li>精神科<br/><img src="images/jingshenke.png" class="small"/><img src="images/jingshenke.png" class="big"><a href="挂号界面.html">挂号</a></li>
+    	</ul>
+    </div>
+    <div id="right">
+           <p class="tit">用户信息</p>
+           <p class="same">就诊卡号：<span>101100</span></span></p>
+           <p class="same">用户姓名：<span>小明</span></p>
+           <p class="same">用户性别：<span>女</span></p>
+           <a href="" class="same" id="re">挂号记录</a>
+           <a href="" class="same" id="ex">安全退出</a>
+    </div>
+    <div id="zhe"></div>
+    <div id="exit">
+    	<p>您确定要退出么？</p>
+    	<input type="button" value="确定">
+    	<input type="button" value="取消">
+    </div>
+    
+    
+</body>
+</html>
+<script type="text/javascript" src="jquery-2.0.2.js"></script>
+<script type="text/javascript">	
+        var height=document.documentElement.clientHeight;
+		var width=document.documentElement.clientWidth;
+		$('#zhe').css('height',height).css('width',width);
+		$('#ex').click(function(e){
+			$('#zhe').show();
+			$('#exit').show();
+			e.preventDefault();
+		});
+		$('#exit input[value=取消]').click(function()
+			{
+			$('#zhe').hide();
+			$('#exit').hide();
+			});
+		$('#exit input[value=确定]').click(function()
+			{
+			window.location.href="登录页面.html";
+			});
+		$('#re').click(function(e)
+			{
+				
+				alert("你已经挂了泌尿内科中的撸神专家的号！");
+			});
+        $(function(){
+	    
+	    	$(".small")[0].onmouseover=function(){
+			$(".small")[0].style.display="none";
+			$(".big")[0].style.display="block";
+            
+		};
+		$(".big")[0].onmouseout=function(){
+			$(".big")[0].style.display="none";
+			$(".small")[0].style.display="block";
+		}
+		
+		$(".small")[1].onmouseover=function(){
+			$(".small")[1].style.display="none";
+			$(".big")[1].style.display="block";
+
+		};
+		$(".big")[1].onmouseout=function(){
+			$(".big")[1].style.display="none";
+			$(".small")[1].style.display="block";
+		}
+		$(".small")[2].onmouseover=function(){
+			$(".small")[2].style.display="none";
+			$(".big")[2].style.display="block";
+
+		};
+		$(".big")[2].onmouseout=function(){
+			$(".big")[2].style.display="none";
+			$(".small")[2].style.display="block";
+		}
+	    ;
+		
+	    $(".small")[3].onmouseover=function(){
+			$(".small")[3].style.display="none";
+			$(".big")[3].style.display="block";
+
+		};
+		$(".big")[3].onmouseout=function(){
+			$(".big")[3].style.display="none";
+			$(".small")[3].style.display="block";
+		}
+		$(".small")[4].onmouseover=function(){
+			$(".small")[4].style.display="none";
+			$(".big")[4].style.display="block";
+
+		};
+		$(".big")[4].onmouseout=function(){
+			$(".big")[4].style.display="none";
+			$(".small")[4].style.display="block";
+		}
+		$(".small")[5].onmouseover=function(){
+			$(".small")[5].style.display="none";
+			$(".big")[5].style.display="block";
+
+		};
+		$(".big")[5].onmouseout=function(){
+			$(".big")[5].style.display="none";
+			$(".small")[5].style.display="block";
+		}
+			});
+	
+</script>

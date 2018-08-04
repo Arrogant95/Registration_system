@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>医疗系统</title>
+<style type="text/css">
+	*{margin:0;padding: 0;}
+	body{background: url(images/bgpic3.jpg);background-size: 100% 100%; }
+	.left{float: left;}
+	#ttl{height: 78px;background-color: #DFDFDF;text-align: center;border-bottom: 1px solid #CDCDCD;line-height: 78px;color:#F78F1E;}/*头部，即登录系统那几个文字*/
+	#register{width: 350px;height:320px;border: 1px solid #CDCDCD;margin:135px auto;background-color: #EAEAEA;box-shadow:0px 0px 10px #333;}/*整一个大的框*/
+	.circle{border-radius: 4px;}
+    .toleft{margin-left: 36px;width:270px;height:27px; }
+    .totop{margin-top: 13px;}
+    #user{background: url(images/user.png);background-repeat: no-repeat;}
+    #lock{background: url(images/lock.png);background-repeat: no-repeat;}
+    .login{margin-left: 36px;}
+    .login img{margin-top:18px;width: 84px;height: 36px;border: 0px;}
+    #forget{font-size: 12px;}
+</style>
+<script type="text/javascript" src="jquery-2.0.2.js"></script>
+<script type="text/javascript">
+
+    window.onresize=function(){
+    	var top=(document.documentElement.clientHeight-320)/2;
+        var left=(document.documentElement.clientWidth-350)/2;
+        $("#register").css("top",top).css("left",left)
+    }
+	window.onload=function(){
+		
+		var b=document.getElementById("user");
+		b.onclick=function(){
+			b.style.background="white";
+		}
+		b.onblur=function(){
+			b.style.background="#EAEAEA";
+		}
+		var c=document.getElementById("lock");
+		c.onclick=function(){
+			c.style.background="white";
+		}
+		c.onblur=function(){
+			c.style.background="#EAEAEA";
+		}
+	}
+</script>
+</head>
+<body>
+  <div id="background">
+	  <div id="register" class="circle">
+	  	 <div id="ttl">
+	  	 	<h1>登录系统</h1>
+	  	 </div>
+	  	 <p class="toleft totop">username</p>
+	  	 <input class="toleft circle" id="user" type="text">
+	  	 <p class="toleft totop">password</p>
+	  	 <input class="toleft circle"  id="lock" type="password">
+	  	 <a class="login" href="挂号系统.html"><img src="images/submit.png"></a>
+	  	 <a class="login"  href="新用户注册.html"><img src="images/register.png"></a>
+	  	 <a href="" id="forget">忘记密码？</a>
+	  </div>
+  </div>
+</body>
+</html>
