@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<title></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -18,6 +18,9 @@
           .same{margin-left: 30px;}
           .record{margin-top: 20px;}
           a{text-decoration: none;}
+         #exit{position: absolute;top: 180px;left: 500px;background-color: white;width: 180px;height: 60px;text-align: center;padding-top: 30px; display: none;}
+         #find{position: absolute;top: 180px;left: 500px;background-color: white;width: 180px;height: 60px;text-align: center;padding-top: 30px; display: none;}
+         #zhe{opacity: 0.3;background-color: #000;position: absolute;top: 0;left: 0;display: none;}
 	</style>
 </head>
 <body>
@@ -40,8 +43,8 @@
                     <td>周二上午</td>
                     <td>许仙</td>
                     <td>普通</td>
-                    <td>4</td>
-                    <td class="red">1</td>
+                    <td>10</td>
+                    <td class="red" id="row1" th:text="${retain}"><span id="show">5</span></td>
                     <td><a href="" >挂号</a></td>             
                 </tr>
                 <tr class="gray">
@@ -130,17 +133,91 @@
     </div>
     <div id="right">
            <p class="tit">用户信息</p>
-           <p class="same">就诊卡号：<span>101100</span></span></p>
-           <p class="same">用户姓名：<span>小明</span></p>
-           <p class="same">用户性别：<span>女</span></p>
-           <a href="" class="same record" >挂号记录</a>
-           <a href="" class="same record">安全退出</a>
+           <p class="same">用户年龄：<span id="age"></span></p>
+           <p class="same">用户姓名：<span id="name" ></span></p>
+           <p class="same">用户性别：<span id="sex" ></span></p>
+           <a href="" id="re" class="same record" >挂号记录</a>
+           <a href="" id="ex" class="same record">安全退出</a>
+    </div>
+
+    <div id="zhe"></div>
+    <div id="exit">
+        <p>您确定要退出么？</p>
+        <input type="button" value="确定">
+        <input type="button" value="取消">
+    </div>
+    <div id="find">
+        <p>您已挂了<span id="register"></span></p>
+        <input type="button" value="确定">
     </div>
 </body>
 </html>
 <script type="text/javascript" src="jquery-2.0.2.js"></script>
 <script type="text/javascript">
-	$('td a').click(function(){
-		alert("挂号成功");
-	});
+    var height=document.documentElement.clientHeight;
+    var width=document.documentElement.clientWidth;
+    $('#zhe').css('height',height).css('width',width);
+    $('#ex').click(function(e){
+        $('#zhe').show();
+        $('#exit').show();
+        e.preventDefault();
+    });
+    $('#re').click(function(e){
+        $('#zhe').show();
+        $('#find').show();
+        e.preventDefault();
+    });
+    $('#find input[value=确定]').click(function()
+    {
+        $('#zhe').hide();
+        $('#find').hide();
+    });
+    $('#exit input[value=取消]').click(function()
+    {
+        $('#zhe').hide();
+        $('#exit').hide();
+    });
+    $('#exit input[value=确定]').click(function()
+    {
+        window.location.href="/index";
+    });
+    var obj= document.location.search;
+    obj = obj.replace(/[^0-9]/g,'');
+    load();
+    function load() {
+
+        $.ajax({
+            url:'/showRecord',
+            data:{Id:obj},
+            type:'POST',
+            success:function (data) {
+                $('#age').html(data.age);
+                $('#name').html(data.name);
+                $('#sex').html(data.sex)
+                $('#register').html(data.register)
+            }
+        })
+
+    $('td a').click(function () {
+        $.ajax(
+            {
+                url:'/tryRegister',
+                data:{Id:obj,register:"骨科（许仙）",key:"xx"},
+                type:'POST',
+                success:function (data) {
+                    if (data == "false"){
+                        alert("挂号失败");
+                        return;
+                    }
+                    var re = data.toString();
+                    var temp = re.split(":");
+                    $('#register').html(temp[0]);
+                    $('#show').html(temp[1]);
+                }
+
+            }
+        )
+    })
+
+    }
 </script>

@@ -1,24 +1,25 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>医疗系统</title>
 <style type="text/css">
 	*{margin:0;padding: 0;}
-	body{background: url(images/bgpic3.jpg);background-size: 100% 100%; }
+	body{background: url(/images/bgpic3.jpg);background-size: cover; background-repeat: no-repeat;width: 100%;height: 100%}
 	.left{float: left;}
 	#ttl{height: 78px;background-color: #DFDFDF;text-align: center;border-bottom: 1px solid #CDCDCD;line-height: 78px;color:#F78F1E;}/*头部，即登录系统那几个文字*/
 	#register{width: 350px;height:320px;border: 1px solid #CDCDCD;margin:135px auto;background-color: #EAEAEA;box-shadow:0px 0px 10px #333;}/*整一个大的框*/
 	.circle{border-radius: 4px;}
     .toleft{margin-left: 36px;width:270px;height:27px; }
     .totop{margin-top: 13px;}
-    #user{background: url(images/user.png);background-repeat: no-repeat;}
-    #lock{background: url(images/lock.png);background-repeat: no-repeat;}
+    #user{background: url(/images/user.png);background-repeat: no-repeat;}
+    #lock{background: url(/images/lock.png);background-repeat: no-repeat;}
     .login{margin-left: 36px;}
     .login img{margin-top:18px;width: 84px;height: 36px;border: 0px;}
     #forget{font-size: 12px;}
 </style>
-<script type="text/javascript" src="jquery-2.0.2.js"></script>
+<script type="text/javascript" src="/jquery-2.0.2.js"></script>
 <script type="text/javascript">
 
     window.onresize=function(){
@@ -42,7 +43,34 @@
 		c.onblur=function(){
 			c.style.background="#EAEAEA";
 		}
+
 	}
+
+	$(function () {
+        $('#submit').click(function () {
+            var count = $('#user').val();
+            var password = $('#lock').val();
+            if (count == ""||password == "" ){
+                alert("账号或密码不能为空")
+                return;
+            }
+
+            $.ajax({
+                url:'/trySignIn',
+                data:{count:count,password:password},
+                type:'POST',
+                success:function (data) {
+                    if (data == 0){
+						alert("账号或密码错误");
+                    }else {
+                        window.location.href="/reservation?Id="+data;
+					}
+                }
+
+            })
+        })
+    })
+
 </script>
 </head>
 <body>
@@ -55,8 +83,8 @@
 	  	 <input class="toleft circle" id="user" type="text">
 	  	 <p class="toleft totop">password</p>
 	  	 <input class="toleft circle"  id="lock" type="password">
-	  	 <a class="login" href="挂号系统.html"><img src="images/submit.png"></a>
-	  	 <a class="login"  href="新用户注册.html"><img src="images/register.png"></a>
+	  	 <a class="login" id="submit" href=""><img src="/images/submit.png"></a>
+	  	 <a class="login"  href="/signUp"><img src="/images/register.png"></a>
 	  	 <a href="" id="forget">忘记密码？</a>
 	  </div>
   </div>

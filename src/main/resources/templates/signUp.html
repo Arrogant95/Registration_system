@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title></title>
+	<style type="text/css">
+	   *{padding: 0;margin: 0;}
+	   #head img{width: 100%;height: 80px;}
+         #head{padding-left: 30px;padding-right: 30px;padding-top:20px; }
+       #regi{width: 580px;height: 620px;padding-left: 40px;position: relative;float: left;margin-left: 30px;margin-top: 36px;padding-left: 200px;font-size: large;}
+       textarea{vertical-align: top;}
+       span{color: red;}
+       .write{margin-top: 7px;margin-left: 40px;border-radius:3px;box-shadow: 0 0 1px #222;}
+       #but{position: absolute;left: 630px;top: 380px;}
+       #zhuce img{float: right;width: 460px;height: 400px;margin-right: 30px;margin-top: 12px;}
+	</style>
+
+	<script type="text/javascript" src="jquery-2.0.2.js"></script>
+	<script type="text/javascript">
+        $(function () {
+            $('#sub').click(function () {
+                var count = $('#count').val();
+                var password = $('#password').val();
+                var name = $('#name').val();
+                var sex = $('input:radio[name="sex"]:checked').val();
+                var age = $('#age').val();
+                var IdCard = $('#IdCard').val();
+                var workPlace = $('#workPlace').val();
+                var fixedTelephone = $('#fixedTelephone').val();
+                var mobilePhone = $('#mobilePhone').val();
+                var contactAddress = $('#contactAddress').val();
+                
+                if (count == ""||password == "" ){
+                    alert("账号或密码不能为空");
+                    return;
+                }
+
+                if (name == ""){
+                    alert("姓名不能为空");
+                    return;
+				}
+
+                if (IdCard == ""){
+                    alert("身份证号不能为空");
+                    return;
+                }
+
+                if (mobilePhone == ""){
+                    alert("移动电话不能为空");
+                    return;
+                }
+
+                if (contactAddress == ""){
+                    alert("通讯地址不能为空");
+                    return;
+                }
+
+
+                $.ajax({
+                    url:'/trySignUp',
+					datatype:"json",
+                    data:{count:count,password:password,name:name,sex:sex,age:age,Idcard:IdCard,workPlace:workPlace,fixedTelephone:fixedTelephone,mobilePhone:mobilePhone,contactAddress:contactAddress},
+                    type:'POST',
+                    success:function (data) {
+                        if (data == 0){
+                            alert("账号已有人使用");
+                        }else {
+                            window.location.href="/reservation?Id="+data;
+                        }
+                    }
+
+                })
+            })
+        })
+	</script>
+</head>
+<body>
+     <div id="head">
+     	<img src="images/head3.jpg">
+     </div>
+     <div id="regi">
+      账号：<span>*</span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" value="" id="count" name="账号" class="write"><br/>
+      密码：<span>*</span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" value="" id="password" name="密码" class="write"><br/>
+     	姓名：<span>*</span>&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" value="" id="name" name="姓名" class="write" width="36px"><br/>
+     	性别：<span>*</span>&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="radio" name="sex" class="write" value="男">男<input type="radio" name="sex" class="write" value="女">女<br/>
+     	年龄：<span>*</span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" value="" id="age" name="年龄" class="write"><br/>
+     	身份证号：<span>*</span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" value="" name="card" id="IdCard" class="write"><br/>
+     	工作单位：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" value="" name="年龄" id="workPlace" class="write"><br/>
+     	紧急联系人电话：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" value="" name="年龄" id="fixedTelephone" class="write"><br/>
+     	移动电话：<span>*</span> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" value="" name="年龄" id="mobilePhone" class="write"><br/>
+     	通讯地址：<span>*</span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<textarea rows="4" cols="20" class="write" id="contactAddress"></textarea><br/>
+     	<div id="but">
+     	<input type="submit" id="sub" value="注册"  >
+     	<input type="reset" value="重置"  >
+     	</div>
+
+     </div>
+     <div id="zhuce"><img src="images/zhuce.jpg"></div>
+</body>
+</html>

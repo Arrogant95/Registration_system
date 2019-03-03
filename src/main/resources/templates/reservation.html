@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<title></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -17,6 +17,7 @@
          .small{width: 80px;height: 80px;display: block;padding-left: 115px;}
          .same{margin-left: 30px;}
          #exit{position: absolute;top: 180px;left: 500px;background-color: white;width: 180px;height: 60px;text-align: center;padding-top: 30px; display: none;}
+		 #find{position: absolute;top: 180px;left: 500px;background-color: white;width: 180px;height: 60px;text-align: center;padding-top: 30px; display: none;}
          #zhe{opacity: 0.3;background-color: #000;position: absolute;top: 0;left: 0;display: none;}
 	</style>
 </head>
@@ -25,21 +26,21 @@
     <div id="left">
     	<p class="tit">选择科室</p>
     	<ul >
-    		<li>泌尿内科<br/><img src="images/miniao.png" class="small" /><img src="images/miniao.png" class="big"><a href="挂号界面.html">挂号</a></li>
-    		<li>产科<br/><img src="images/changke.png"  class="small"/><img src="images/changke.png" class="big"><a href="挂号界面.html">挂号</a></li>
-    		<li>耳鼻咽喉科<br/><img src="images/erhoubi.png" class="small"/><img src="images/erhoubi.png" class="big"><a href="挂号界面.html">挂号</a></li>
-    		<li>妇科<br/><img src="images/fuke.png" class="small"/><img src="images/fuke.png" class="big"><a href="挂号界面.html">挂号</a></li>
+    		<li>泌尿内科<br/><img src="images/miniao.png" class="small" /><img src="images/miniao.png" class="big"><a href="/registerInterface?Id=1">挂号</a></li>
+    		<li>产科<br/><img src="images/changke.png"  class="small"/><img src="images/changke.png" class="big"><a href="/registerInterface">挂号</a></li>
+    		<li>耳鼻咽喉科<br/><img src="images/erhoubi.png" class="small"/><img src="images/erhoubi.png" class="big"><a href="/registerInterface">挂号</a></li>
+    		<li>妇科<br/><img src="images/fuke.png" class="small"/><img src="images/fuke.png" class="big"><a href="/registerInterface">挂号</a></li>
     	</ul>
     	<ul>
-    		<li>骨科<br/><img src="images/guke.png" class="small"/><img src="images/guke.png" class="big"><a href="挂号界面.html">挂号</a></li>
-    		<li>精神科<br/><img src="images/jingshenke.png" class="small"/><img src="images/jingshenke.png" class="big"><a href="挂号界面.html">挂号</a></li>
+    		<li>骨科<br/><img src="images/guke.png" class="small"/><img src="images/guke.png" class="big"><a href="/registerInterface">挂号</a></li>
+    		<li>精神科<br/><img src="images/jingshenke.png" class="small"/><img src="images/jingshenke.png" class="big"><a href="/registerInterface">挂号</a></li>
     	</ul>
     </div>
     <div id="right">
            <p class="tit">用户信息</p>
-           <p class="same">就诊卡号：<span>101100</span></span></p>
-           <p class="same">用户姓名：<span>小明</span></p>
-           <p class="same">用户性别：<span>女</span></p>
+			<p class="same">用户年龄：<span id="age"></span></p>
+			<p class="same">用户姓名：<span id="name" ></span></p>
+			<p class="same">用户性别：<span id="sex" ></span></p>
            <a href="" class="same" id="re">挂号记录</a>
            <a href="" class="same" id="ex">安全退出</a>
     </div>
@@ -49,8 +50,12 @@
     	<input type="button" value="确定">
     	<input type="button" value="取消">
     </div>
-    
-    
+
+	<div id="find">
+		<p>您已挂了<!--/*@thymesVar id="register" type=""*/-->
+		<span id="register"></span></p>
+		<input type="button" value="确定">
+	</div>
 </body>
 </html>
 <script type="text/javascript" src="jquery-2.0.2.js"></script>
@@ -63,6 +68,16 @@
 			$('#exit').show();
 			e.preventDefault();
 		});
+        $('#re').click(function(e){
+            $('#zhe').show();
+            $('#find').show();
+            e.preventDefault();
+        });
+        $('#find input[value=确定]').click(function()
+        {
+            $('#zhe').hide();
+            $('#find').hide();
+        });
 		$('#exit input[value=取消]').click(function()
 			{
 			$('#zhe').hide();
@@ -70,12 +85,7 @@
 			});
 		$('#exit input[value=确定]').click(function()
 			{
-			window.location.href="登录页面.html";
-			});
-		$('#re').click(function(e)
-			{
-				
-				alert("你已经挂了泌尿内科中的撸神专家的号！");
+			window.location.href="/index";
 			});
         $(function(){
 	    
@@ -136,6 +146,27 @@
 			$(".big")[5].style.display="none";
 			$(".small")[5].style.display="block";
 		}
+
+		var obj= document.location.search;
+		obj = obj.replace(/[^0-9]/g,'');
+		$("a").attr("href","/registerInterface?id="+obj);
+
+		load();
+		function load() {
+
+		    $.ajax({
+				url:'/showRecord',
+				data:{Id:obj},
+				type:'POST',
+				success:function (data) {
+				    $('#age').html(data.age);
+				    $('#name').html(data.name);
+				    $('#sex').html(data.sex)
+					$('#register').html(data.register)
+                }
+			})
+
+        };
 			});
-	
+
 </script>
