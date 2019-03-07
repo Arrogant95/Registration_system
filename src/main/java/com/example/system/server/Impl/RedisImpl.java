@@ -1,6 +1,6 @@
 package com.example.system.server.Impl;
 
-import com.example.system.server.RedisDao;
+import com.example.system.server.Dao.RedisDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

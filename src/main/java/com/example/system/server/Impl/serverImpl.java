@@ -1,8 +1,9 @@
 package com.example.system.server.Impl;
 
 import com.example.system.pojo.User;
-import com.example.system.server.Dao;
-import com.example.system.server.RedisDao;
+import com.example.system.server.Dao.Dao;
+import com.example.system.server.Dao.RedisDao;
+import com.example.system.server.Dao.RedisDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;

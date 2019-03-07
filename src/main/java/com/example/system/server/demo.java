@@ -1,6 +1,8 @@
 package com.example.system.server;
 
 import com.example.system.pojo.User;
+import com.example.system.server.Dao.Dao;
+import com.example.system.server.Dao.RedisDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
