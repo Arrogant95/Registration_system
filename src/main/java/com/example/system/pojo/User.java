@@ -1,8 +1,11 @@
 package com.example.system.pojo;
 
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class User {
     private int Id;
     private String count;

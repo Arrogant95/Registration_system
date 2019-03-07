@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.system.server.mapper.UserMapper">
+    <select id="findRecord" parameterType="int" resultType="User">
+        select * from user where Id = #{value }
+    </select>
+
+    <insert id="save" parameterType="User">
+        insert into user(name,sex,age,IdCard,workPlace,fixedTelephone,mobilePhone,contactAddress) values(#{name},#{sex},#{age},#{IdCard},#{workPlace},#{fixedTelephone},#{mobilePhone},#{contactAddress})
+    </insert>
+
+    <update id="register" parameterType="User">
+        update user set register = #{register} where id = #{Id}
+    </update>
+
+    <select id="login" resultType="User">
+        select * from u_count where usercount=#{count} and password=#{password}
+    </select>
+
+    <select id="compare" parameterType="String" resultType="User">
+        select * from u_count where usercount = #{value }
+    </select>
+
+    <insert id="savepw" parameterType="User">
+        insert into u_count (usercount,password) values(#{count},#{password})
+    </insert>
+</mapper>
